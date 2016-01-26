@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Xamarin.Forms.Platform.iOS;
 
 namespace Xamarin.VisUITest.App.iOS
 {
@@ -11,7 +12,7 @@ namespace Xamarin.VisUITest.App.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public partial class AppDelegate : FormsApplicationDelegate
     {
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -22,7 +23,7 @@ namespace Xamarin.VisUITest.App.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+            Forms.Forms.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
