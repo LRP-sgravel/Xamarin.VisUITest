@@ -3,14 +3,12 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>46d48dca-a35e-4de8-82b2-fed23abe0881</SharedGUID>
+    <SharedGUID>9d9b7acd-779e-4df8-a20c-0d5260316a5d</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Xamarin.VisUITest</Import_RootNamespace>
+    <Import_RootNamespace>Xamarin.VisUITests.Unit.Tests.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)BitmapExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IAppExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)VisUITest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ImageComparison.cs" />
   </ItemGroup>
 </Project>

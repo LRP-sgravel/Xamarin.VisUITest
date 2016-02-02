@@ -1,21 +1,17 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Xamarin.UITest;
-using Xamarin.UITest.Queries;
 using Xamarin.VisUITest;
 
 namespace Xamarin.VisUITest.Tests
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
-    public class Tests
+    public class AppLaunches
     {
         IApp app;
         Platform platform;
 
-        public Tests(Platform platform)
+        public AppLaunches(Platform platform)
         {
             this.platform = platform;
         }
@@ -27,7 +23,7 @@ namespace Xamarin.VisUITest.Tests
         }
 
         [Test]
-        public void AppLaunches()
+        public void TestLaunch()
         {
             app.Screenshot("First screen.");
         }
