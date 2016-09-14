@@ -77,12 +77,6 @@
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Xamarin.VisUITest.Lib.Droid\Xamarin.VisUITest.Lib.Droid.csproj">
-      <Project>{AD192EEA-D8AE-4ECD-B325-5FC61FA2A39C}</Project>
-      <Name>Xamarin.VisUITest.Lib.Droid</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.

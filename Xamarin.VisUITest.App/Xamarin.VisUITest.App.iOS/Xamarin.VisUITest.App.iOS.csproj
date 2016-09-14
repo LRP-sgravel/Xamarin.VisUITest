@@ -95,12 +95,6 @@
     <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Xamarin.VisUItest.Lib.iOS\Xamarin.VisUItest.Lib.iOS.csproj">
-      <Project>{c90ad2c8-1a85-4558-b8e4-d0d0c7fb2448}</Project>
-      <Name>Xamarin.VisUItest.Lib.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
     <ProjectReference Include="..\Xamarin.VisUITest.App\Xamarin.VisUITest.App.csproj">
       <Name>Xamarin.VisUITest.App</Name>
     </ProjectReference>
