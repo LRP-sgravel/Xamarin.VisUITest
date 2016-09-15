@@ -62,7 +62,7 @@ namespace Xamarin.VisUITest
         {
         }
 
-        private static string GetPlatformScreenCordsBackdoorName()
+        private static string GetPlatformScreenCoordsBackdoorName()
         {
             string backdoorName = string.Empty;
 
@@ -81,13 +81,32 @@ namespace Xamarin.VisUITest
 
         public static Rectangle GetUsableScreenCoordinates(IApp app)
         {
-            string coordsJson = app.Invoke(GetPlatformScreenCordsBackdoorName()) as string;
-            JObject coordsJObject = JsonConvert.DeserializeObject<JObject>(coordsJson);
 
-            return new Rectangle(coordsJObject.Value<int>("X"),
-                                 coordsJObject.Value<int>("Y"),
-                                 coordsJObject.Value<int>("Width"),
-                                 coordsJObject.Value<int>("Height"));
+            try
+            {
+                string coordsJson = app.Invoke(GetPlatformScreenCoordsBackdoorName()) as string;
+                JObject coordsJObject = JsonConvert.DeserializeObject<JObject>(coordsJson);
+
+                return new Rectangle(coordsJObject.Value<int>("X"),
+                                     coordsJObject.Value<int>("Y"),
+                                     coordsJObject.Value<int>("Width"),
+                                     coordsJObject.Value<int>("Height"));
+            }
+            catch (Exception e)
+            {
+                string error = "Cannot find 'GetScreenCoords' VisUITest backdoor.  ";
+
+                if (Platform == Platform.Android)
+                {
+                    error += "Does your current Activity subclass VisUITestActivity?";
+                }
+                else if (Platform == Platform.iOS)
+                {
+                    error += "Did you include the iOS VisUITest NuGet pakcage in your project?";
+                }
+
+                throw new MissingMethodException(error);
+            }
         }
     }
 }
