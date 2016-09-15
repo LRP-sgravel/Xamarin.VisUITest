@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Drawing;
+using System.IO;
 
 namespace Xamarin.VisUITest.Tests.Helpers
 {
@@ -14,12 +15,25 @@ namespace Xamarin.VisUITest.Tests.Helpers
 
         public static void RemoveReferenceImage(string imageName)
         {
-            string path = VisUITest.ReferenceImagePath + imageName + ".png";
+            string imagePath = VisUITest.ReferenceImagePath + imageName + ".png";
 
-            if(File.Exists(path))
+            if(File.Exists(imagePath))
             {
-                File.Delete(path);
+                File.Delete(imagePath);
             }
+        }
+
+        public static Bitmap LoadReferenceImage(string imageName)
+        {
+            string imagePath = VisUITest.ReferenceImagePath + imageName + ".png";
+            Bitmap result = null;
+
+            if(File.Exists(imagePath))
+            {
+                result = AForge.Imaging.Image.FromFile(imagePath);
+            }
+
+            return result;
         }
     }
 }

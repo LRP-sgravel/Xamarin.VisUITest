@@ -7,12 +7,12 @@ namespace Xamarin.VisUITest.Tests
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
-    public class NewImageReturnsUnconclusive
+    public class NewImageReturnsInconclusive
     {
         IApp app;
         Platform platform;
 
-        public NewImageReturnsUnconclusive(Platform platform)
+        public NewImageReturnsInconclusive(Platform platform)
         {
             this.platform = platform;
         }
