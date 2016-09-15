@@ -26,9 +26,9 @@ namespace Xamarin.VisUITest.Tests
         [Test]
         public void IGetAnInconclusiveResultForNewImage()
         {
-            VisUITestHelpers.RemoveReferenceImage("TestLaunch");
+            VisUITestHelpers.RemoveReferenceImage("NewTestImage");
 
-            Assert.Throws<InconclusiveException>(() => app.DontSeeVisualChanges("TestLaunch"));
+            Assert.Throws<InconclusiveException>(() => app.DontSeeVisualChanges("NewTestImage"));
         }
     }
 }
