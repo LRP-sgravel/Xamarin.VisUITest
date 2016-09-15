@@ -31,7 +31,6 @@ namespace Xamarin.VisUITest.Tests
             Bitmap referenceImage;
             AppResult page;
 
-            app.WaitForElement(query => query.Id("content"));
             page = app.Query("content").FirstOrDefault();
 
             app.DontSeeVisualChanges("FullScreenTest");
