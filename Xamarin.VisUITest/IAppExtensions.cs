@@ -55,6 +55,7 @@ namespace Xamarin.VisUITest
                 else
                 {
                     newImageInfo.CopyTo(referencePath);
+                    Assert.Inconclusive();
                 }
             }
             else
