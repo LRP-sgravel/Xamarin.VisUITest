@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using AForge.Imaging.Filters;
 using Xamarin.UITest;
 using Imaging = AForge.Imaging;
 using NUnit.Framework;
@@ -99,15 +101,27 @@ namespace Xamarin.VisUITest
         {
             FileInfo newImageInfo = app.Screenshot(imageName);
             string destination = VisUITest.CurrentImagePath + imageName + ".png";
+            Rectangle screenCoords = VisUITest.GetUsableScreenCoordinates(app);
 
             if (File.Exists(destination))
             {
                 File.Delete(destination);
             }
 
-            newImageInfo.MoveTo(destination);
+            CropToCoordinatesAndSave(newImageInfo, imageName, screenCoords);
 
             return new FileInfo(destination);
+        }
+
+        private static void CropToCoordinatesAndSave(FileInfo source, string imageName, Rectangle coords)
+        {
+            string destination = VisUITest.CurrentImagePath + imageName + ".png";
+            Bitmap originalImage = Imaging.Image.FromFile(source.FullName);
+            Bitmap croppedImage;
+            Crop cropper = new Crop(coords);
+
+            croppedImage = cropper.Apply(originalImage);
+            croppedImage.Save(destination, ImageFormat.Png);
         }
     }
 }

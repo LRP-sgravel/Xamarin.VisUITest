@@ -214,6 +214,10 @@
       <Project>{BAA1AFD6-59ED-46F7-9E05-7C9EA1E25FC3}</Project>
       <Name>Xamarin.VisUITest.App</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Xamarin.VisUITest.Backdoors.Forms.Droid\Xamarin.VisUITest.Backdoors.Forms.Droid.csproj">
+      <Project>{a11281a0-f221-4558-b49b-0236c6f44093}</Project>
+      <Name>Xamarin.VisUITest.Backdoors.Forms.Droid</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

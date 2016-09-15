@@ -1,27 +1,38 @@
 ﻿using System;
+using System.Drawing;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Xamarin.UITest;
 
 namespace Xamarin.VisUITest
 {
     public class VisUITest
     {
-        private string mReferenceImagePath = "_output/VisUITest/ref/";
+        private string _referenceImagePath = "_output/VisUITest/ref/";
         public static string ReferenceImagePath
         {
-            get { return Instance.mReferenceImagePath; }
-            set { Instance.mReferenceImagePath = value; }
+            get { return _Instance._referenceImagePath; }
+            set { _Instance._referenceImagePath = value; }
         }
 
-        private string mCurrentImagePath = "_output/VisUITest/";
+        private string _currentImagePath = "_output/VisUITest/";
         public static string CurrentImagePath
         {
-            get { return Instance.mCurrentImagePath; }
-            set { Instance.mCurrentImagePath = value; }
+            get { return _Instance._currentImagePath; }
+            set { _Instance._currentImagePath = value; }
+        }
+        
+        private Platform _platform = Platform.iOS;
+        public static Platform Platform
+        {
+            get { return _Instance._platform; }
+            set { _Instance._platform = value; }
         }
 
-        private ushort mMaximumDeviation = 0;
+        private ushort _maximumDeviation = 0;
         public static ushort MaximumDeviation
         {
-            get { return Instance.mMaximumDeviation; }
+            get { return _Instance._maximumDeviation; }
             set
             {
                 if (value > 100)
@@ -29,25 +40,54 @@ namespace Xamarin.VisUITest
                     throw new ArgumentOutOfRangeException("MaximumDeviation", "Maximum deviation must be between 0 and 100");
                 }
 
-                Instance.mMaximumDeviation = value;
+                _Instance._maximumDeviation = value;
             }
         }
-        private static VisUITest mInstance = null;
-        private static VisUITest Instance
+
+        private static VisUITest _instance = null;
+        private static VisUITest _Instance
         {
             get
             {
-                if (mInstance == null)
+                if (_instance == null)
                 {
-                    mInstance = new VisUITest();
+                    _instance = new VisUITest();
                 }
 
-                return mInstance;
+                return _instance;
             }
         }
 
         private VisUITest()
         {
+        }
+
+        private static string GetPlatformScreenCordsBackdoorName()
+        {
+            string backdoorName = string.Empty;
+
+            if (Platform == Platform.iOS)
+            {
+                backdoorName = "getScreenSize:";
+            }
+            else
+            {
+                backdoorName = "GetUsableScreenCoordinates";
+            }
+
+            return backdoorName;
+        }
+
+
+        public static Rectangle GetUsableScreenCoordinates(IApp app)
+        {
+            string coordsJson = app.Invoke(GetPlatformScreenCordsBackdoorName()) as string;
+            JObject coordsJObject = JsonConvert.DeserializeObject<JObject>(coordsJson);
+
+            return new Rectangle(coordsJObject.Value<int>("X"),
+                                 coordsJObject.Value<int>("Y"),
+                                 coordsJObject.Value<int>("Width"),
+                                 coordsJObject.Value<int>("Height"));
         }
     }
 }

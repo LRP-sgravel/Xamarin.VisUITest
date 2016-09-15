@@ -29,13 +29,13 @@ namespace Xamarin.VisUITest.Tests
         public void ICanCompareFullScreens()
         {
             Bitmap referenceImage;
-
-            app.DontSeeVisualChanges("FullScreenTest");
-            referenceImage = VisUITestHelpers.LoadReferenceImage("FullScreenTest");
             AppResult page;
 
             app.WaitForElement(query => query.Id("content"));
             page = app.Query("content").FirstOrDefault();
+
+            app.DontSeeVisualChanges("FullScreenTest");
+            referenceImage = VisUITestHelpers.LoadReferenceImage("FullScreenTest");
 
             Assert.AreEqual(page.Rect.Height, referenceImage.Height);
             Assert.AreEqual(page.Rect.Width, referenceImage.Width);

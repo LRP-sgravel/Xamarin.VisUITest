@@ -10,6 +10,7 @@ namespace Xamarin.VisUITest.Tests
     {
         public static IApp StartApp(Platform platform)
         {
+            VisUITest.Platform = platform;
             VisUITest.ReferenceImagePath = "../../../_output/VisUITest/ref/";
             VisUITest.CurrentImagePath = "../../../_output/VisUITest/";
 
