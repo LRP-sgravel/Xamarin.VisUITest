@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using Xamarin.UITest;
 using Imaging = AForge.Imaging;
@@ -11,38 +12,85 @@ namespace Xamarin.VisUITest
     {
         public static void DontSeeVisualChanges(this IApp app, string imageName)
         {
-            FileInfo newImageInfo = app.SaveNamedScreenshot(imageName);
-            string referencePath = VisUITest.ReferenceImagePath + imageName + ".png";
-
-            if (File.Exists(referencePath))
+            if (SetupDirectories())
             {
-                Bitmap source = Imaging.Image.FromFile(newImageInfo.FullName);
-                Bitmap reference = Imaging.Image.FromFile(referencePath);
+                FileInfo newImageInfo = app.SaveNamedScreenshot(imageName);
+                string referencePath = VisUITest.ReferenceImagePath + imageName + ".png";
 
-                Assert.IsTrue(source.IsIdenticalTo(reference, VisUITest.MaximumDeviation), "The two images have a visual difference above maximum deviation");
+                if (File.Exists(referencePath))
+                {
+                    Bitmap source = Imaging.Image.FromFile(newImageInfo.FullName);
+                    Bitmap reference = Imaging.Image.FromFile(referencePath);
+
+                    Assert.IsTrue(source.IsIdenticalTo(reference, VisUITest.MaximumDeviation),
+                                  "There is a deviation between screenshot and reference image above allowed deviation");
+                }
+                else
+                {
+                    newImageInfo.CopyTo(referencePath);
+                }
             }
             else
             {
-                newImageInfo.CopyTo(referencePath);
+                Assert.Fail("Failed to setup VisUITest image folders");
             }
         }
 
         public static void SeeVisualChanges(this IApp app, string imageName)
         {
-            FileInfo newImageInfo = app.SaveNamedScreenshot(imageName);
-            string referencePath = VisUITest.ReferenceImagePath + imageName + ".png";
-
-            if (File.Exists(referencePath))
+            if (SetupDirectories())
             {
-                Bitmap source = Imaging.Image.FromFile(newImageInfo.FullName);
-                Bitmap reference = Imaging.Image.FromFile(referencePath);
+                FileInfo newImageInfo = app.SaveNamedScreenshot(imageName);
+                string referencePath = VisUITest.ReferenceImagePath + imageName + ".png";
 
-                Assert.IsFalse(source.IsIdenticalTo(reference, VisUITest.MaximumDeviation), "The two images have a visual difference below maximum deviation");
+                if (File.Exists(referencePath))
+                {
+                    Bitmap source = Imaging.Image.FromFile(newImageInfo.FullName);
+                    Bitmap reference = Imaging.Image.FromFile(referencePath);
+
+                    Assert.IsFalse(source.IsIdenticalTo(reference, VisUITest.MaximumDeviation),
+                                   "There is a deviation between screenshot and reference image below allowed deviation");
+                }
+                else
+                {
+                    newImageInfo.CopyTo(referencePath);
+                }
             }
             else
             {
-                newImageInfo.CopyTo(referencePath);
+                Assert.Fail("Failed to setup VisUITest image folders");
             }
+        }
+
+        private static bool SetupDirectories()
+        {
+            bool result = true;
+
+            if (!Directory.Exists(VisUITest.CurrentImagePath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(VisUITest.CurrentImagePath);
+                }
+                catch (Exception)
+                {
+                    result = false;
+                }
+            }
+
+            if (!Directory.Exists(VisUITest.ReferenceImagePath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(VisUITest.ReferenceImagePath);
+                }
+                catch (Exception)
+                {
+                    result = false;
+                }
+            }
+
+            return true;
         }
 
         private static FileInfo SaveNamedScreenshot(this IApp app, string imageName)
@@ -54,6 +102,7 @@ namespace Xamarin.VisUITest
             {
                 File.Delete(destination);
             }
+
             newImageInfo.MoveTo(destination);
 
             return new FileInfo(destination);
