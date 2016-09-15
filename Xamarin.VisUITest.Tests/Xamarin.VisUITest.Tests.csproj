@@ -66,8 +66,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Acceptance\AppLaunches.cs" />
+    <Compile Include="Acceptance\NewImageReturnsUnconclusive.cs" />
     <Compile Include="AppInitializer.cs" />
+    <Compile Include="Helpers\VisUITestHelpers.cs" />
     <Compile Include="Unit\ImageComparison.cs" />
   </ItemGroup>
   <ItemGroup>

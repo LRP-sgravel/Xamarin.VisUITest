@@ -1,17 +1,18 @@
 ﻿using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.VisUITest;
+using Xamarin.VisUITest.Tests.Helpers;
 
 namespace Xamarin.VisUITest.Tests
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
-    public class AppLaunches
+    public class NewImageReturnsUnconclusive
     {
         IApp app;
         Platform platform;
 
-        public AppLaunches(Platform platform)
+        public NewImageReturnsUnconclusive(Platform platform)
         {
             this.platform = platform;
         }
@@ -23,9 +24,11 @@ namespace Xamarin.VisUITest.Tests
         }
 
         [Test]
-        public void TestLaunch()
+        public void IGetAnInconclusiveResultForNewImage()
         {
-            app.DontSeeVisualChanges("TestLaunch");
+            VisUITestHelpers.RemoveReferenceImage("TestLaunch");
+
+            Assert.Throws<InconclusiveException>(() => app.DontSeeVisualChanges("TestLaunch"));
         }
     }
 }
