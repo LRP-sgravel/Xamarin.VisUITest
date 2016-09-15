@@ -25,7 +25,7 @@ namespace Xamarin.VisUITest.Tests
         [Test]
         public void TestLaunch()
         {
-            app.Screenshot("First screen.");
+            app.DontSeeVisualChanges("TestLaunch");
         }
     }
 }

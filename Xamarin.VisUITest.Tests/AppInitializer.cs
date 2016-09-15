@@ -14,11 +14,17 @@ namespace Xamarin.VisUITest.Tests
             {
                 return ConfigureApp
                     .Android
+                    .ApkFile("../../../Xamarin.VisUITest.App.Droid/bin/Debug/Xamarin.VisUITest.App.Droid-Signed.apk")
+                    .DeviceSerial("emulator-5554")
+                    .EnableLocalScreenshots()
                     .StartApp();
             }
 
             return ConfigureApp
                 .iOS
+                .AppBundle("../../../Xamarin.VisUITest.App.iOS/bin/iPhoneSimulator/Debug/XamarinVisUITestAppiOS.app")
+                .DeviceIdentifier("CC1A7354-8452-4C33-9BF3-453905AC0456")
+                .EnableLocalScreenshots()
                 .StartApp();
         }
     }
