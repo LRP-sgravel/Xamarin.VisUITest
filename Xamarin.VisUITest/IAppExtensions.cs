@@ -6,6 +6,7 @@ using AForge.Imaging.Filters;
 using Xamarin.UITest;
 using Imaging = AForge.Imaging;
 using NUnit.Framework;
+using Xamarin.UITest.Queries;
 
 namespace Xamarin.VisUITest
 {
@@ -17,21 +18,24 @@ namespace Xamarin.VisUITest
             if (SetupDirectories())
             {
                 FileInfo newImageInfo = app.SaveNamedScreenshot(imageName);
-                string referencePath = VisUITest.ReferenceImagePath + imageName + ".png";
 
-                if (File.Exists(referencePath))
-                {
-                    Bitmap source = Imaging.Image.FromFile(newImageInfo.FullName);
-                    Bitmap reference = Imaging.Image.FromFile(referencePath);
+                Assert.IsTrue(ValidateScreenshotSimilarity(imageName, newImageInfo),
+                              "There is a deviation between screenshot and reference image above allowed deviation");
+            }
+            else
+            {
+                Assert.Fail("Failed to setup VisUITest image folders");
+            }
+        }
 
-                    Assert.IsTrue(source.IsIdenticalTo(reference, VisUITest.MaximumDeviation),
-                                  "There is a deviation between screenshot and reference image above allowed deviation");
-                }
-                else
-                {
-                    newImageInfo.CopyTo(referencePath);
-                    Assert.Inconclusive();
-                }
+        public static void DontSeeVisualChanges(this IApp app, string imageName, AppResult element)
+        {
+            if (SetupDirectories())
+            {
+                FileInfo newImageInfo = app.SaveNamedScreenshot(imageName, element.Rect);
+
+                Assert.IsTrue(ValidateScreenshotSimilarity(imageName, newImageInfo),
+                              "There is a deviation between screenshot and reference image above allowed deviation");
             }
             else
             {
@@ -44,21 +48,25 @@ namespace Xamarin.VisUITest
             if (SetupDirectories())
             {
                 FileInfo newImageInfo = app.SaveNamedScreenshot(imageName);
-                string referencePath = VisUITest.ReferenceImagePath + imageName + ".png";
 
-                if (File.Exists(referencePath))
-                {
-                    Bitmap source = Imaging.Image.FromFile(newImageInfo.FullName);
-                    Bitmap reference = Imaging.Image.FromFile(referencePath);
+                Assert.IsFalse(ValidateScreenshotSimilarity(imageName, newImageInfo),
+                               "There is a deviation between screenshot and reference image below allowed deviation");
 
-                    Assert.IsFalse(source.IsIdenticalTo(reference, VisUITest.MaximumDeviation),
-                                   "There is a deviation between screenshot and reference image below allowed deviation");
-                }
-                else
-                {
-                    newImageInfo.CopyTo(referencePath);
-                    Assert.Inconclusive();
-                }
+            }
+            else
+            {
+                Assert.Fail("Failed to setup VisUITest image folders");
+            }
+        }
+
+        public static void SeeVisualChanges(this IApp app, string imageName, AppResult element)
+        {
+            if (SetupDirectories())
+            {
+                FileInfo newImageInfo = app.SaveNamedScreenshot(imageName, element.Rect);
+
+                Assert.IsFalse(ValidateScreenshotSimilarity(imageName, newImageInfo),
+                               "There is a deviation between screenshot and reference image below allowed deviation");
             }
             else
             {
@@ -97,11 +105,44 @@ namespace Xamarin.VisUITest
             return true;
         }
 
+        private static bool ValidateScreenshotSimilarity(string imageName, FileInfo referenceFile)
+        {
+            string referencePath = VisUITest.ReferenceImagePath + imageName + ".png";
+
+            if (File.Exists(referencePath))
+            {
+                Bitmap source = Imaging.Image.FromFile(referenceFile.FullName);
+                Bitmap reference = Imaging.Image.FromFile(referencePath);
+
+                return source.IsIdenticalTo(reference, VisUITest.MaximumDeviation);
+            }
+            else
+            {
+                referenceFile.CopyTo(referencePath);
+                Assert.Inconclusive();
+            }
+
+            return false;
+        }
+
         private static FileInfo SaveNamedScreenshot(this IApp app, string imageName)
+        {
+            Rectangle screenCoords = VisUITest.GetUsableScreenCoordinates(app);
+
+            return app.SaveNamedScreenshot(imageName, screenCoords);
+        }
+
+        private static FileInfo SaveNamedScreenshot(this IApp app, string imageName, AppRect rect)
+        {
+            Rectangle screenCoords = new Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
+
+            return app.SaveNamedScreenshot(imageName, screenCoords);
+        }
+
+        private static FileInfo SaveNamedScreenshot(this IApp app, string imageName, Rectangle screenCoords)
         {
             FileInfo newImageInfo = app.Screenshot(imageName);
             string destination = VisUITest.CurrentImagePath + imageName + ".png";
-            Rectangle screenCoords = VisUITest.GetUsableScreenCoordinates(app);
 
             if (File.Exists(destination))
             {
