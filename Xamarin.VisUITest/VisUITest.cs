@@ -98,11 +98,11 @@ namespace Xamarin.VisUITest
 
                 if (Platform == Platform.Android)
                 {
-                    error += "Does your current Activity subclass VisUITestActivity?";
+                    error += "Was teh Android NuGet package added to your project and does your current Activity subclass VisUITestActivity?";
                 }
                 else if (Platform == Platform.iOS)
                 {
-                    error += "Did you include the iOS VisUITest NuGet pakcage in your project?";
+                    error += "Did you include the iOS VisUITest NuGet package in your project?";
                 }
 
                 throw new MissingMethodException(error);
