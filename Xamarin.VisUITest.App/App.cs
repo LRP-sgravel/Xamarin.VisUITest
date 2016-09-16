@@ -2,10 +2,8 @@
 using Acr.Settings;
 using Xamarin.VisUITest.App.Services;
 using Xamarin.VisUITest.App.ViewModels;
-using MvvmCross.Localization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
-using MvvmCross.Plugins.JsonLocalization;
 
 namespace Xamarin.VisUITest.App
 {
@@ -18,8 +16,6 @@ namespace Xamarin.VisUITest.App
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            InitializeText();
-
             RegisterAppStart<LoadingViewModel>();
         }
 
@@ -27,16 +23,6 @@ namespace Xamarin.VisUITest.App
         {
             Mvx.RegisterSingleton(new MainThread());
             Mvx.RegisterSingleton<ISettings>(Settings.Local);
-        }
-
-        private void InitializeText()
-        {
-            var builder = new TextProviderBuilder();
-            Mvx.RegisterSingleton<IMvxTextProviderBuilder>(builder);
-            Mvx.RegisterSingleton<IMvxTextProvider>(builder.TextProvider);
-
-            // Set language
-            builder.LoadResources("FR_fr");
         }
     }
 }

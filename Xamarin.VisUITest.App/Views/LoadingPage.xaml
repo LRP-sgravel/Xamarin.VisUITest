@@ -8,15 +8,9 @@
         	     AbsoluteLayout.LayoutFlags="All"
         	     Source="Default.png"
         	     Aspect="AspectFit"></Image>
-        <Label AbsoluteLayout.LayoutBounds="0, 0.75, 1, .05"
-               AbsoluteLayout.LayoutFlags="All"
-               Text="{Binding StatusText}"
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"
-               FontSize="14" />
         <Label AbsoluteLayout.LayoutBounds="0, 1, 1, .05"
         	     AbsoluteLayout.LayoutFlags="All"
-        	     Text="{Binding CopyrightText}"
+        	     Text="Just Another Label"
         	     HorizontalTextAlignment="Center"
         	     VerticalTextAlignment="Center"/>
     </AbsoluteLayout>
