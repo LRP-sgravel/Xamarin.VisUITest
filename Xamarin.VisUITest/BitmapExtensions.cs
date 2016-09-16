@@ -6,27 +6,24 @@ namespace Xamarin.VisUITest
 {
     public static class BitmapExtensions
     {
-        public static bool IsIdenticalTo(this Bitmap source, Bitmap reference, int permittedDeviation = 0)
+        public static bool IsIdenticalTo(this Bitmap source, Bitmap reference, float permittedDeviation = 0)
         {
-            bool result = true;
+            bool result = (source == reference);
 
-            if (source != reference)
+            if (!result)
             {
-                TemplateMatch[] compareResult = null;
-                ExhaustiveTemplateMatching matcher = new ExhaustiveTemplateMatching();
-
-                if (source.Width != reference.Width || source.Height != reference.Height)
+                if (source.Width == reference.Width && source.Height == reference.Height)
                 {
-                    result = false;
-                }
-                else
-                {
-                    // Process the images
-                    compareResult = matcher.ProcessImage(source, reference);
-
-                    if (compareResult.Length > 0)
+                    try
                     {
-                        result = (Math.Round(compareResult[0].Similarity * 100, MidpointRounding.AwayFromZero) + permittedDeviation) >= 100;
+                        // Process the images
+                        ExhaustiveTemplateMatching matcher = new ExhaustiveTemplateMatching((100 - permittedDeviation) / 100.0f);
+                        TemplateMatch[] compareResult = matcher.ProcessImage(source, reference);
+
+                        result = (compareResult.Length > 0);
+                    }
+                    catch
+                    {
                     }
                 }
             }

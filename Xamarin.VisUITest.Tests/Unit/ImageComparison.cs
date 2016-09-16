@@ -18,18 +18,18 @@ namespace Xamarin.VisUITest.Tests
             Bitmap imageF = Imaging.Image.FromFile("../../../img/F.tif");
             Bitmap imageG = Imaging.Image.FromFile("../../../img/G.jpg");
 
-            Assert.IsTrue(imageA.IsIdenticalTo(imageA));
-            Assert.IsTrue(imageA.IsIdenticalTo(imageC));
-            Assert.IsFalse(imageA.IsIdenticalTo(imageB));
-            Assert.IsFalse(imageA.IsIdenticalTo(imageF));
+            Assert.IsTrue(imageA.IsIdenticalTo(imageA, 1));
+            Assert.IsTrue(imageA.IsIdenticalTo(imageC, 1));
+            Assert.IsFalse(imageA.IsIdenticalTo(imageB, 1));
+            Assert.IsFalse(imageA.IsIdenticalTo(imageF, 1));
 
-            Assert.IsFalse(imageD.IsIdenticalTo(imageE));
             Assert.IsTrue(imageD.IsIdenticalTo(imageE, 1));
-            Assert.IsFalse(imageD.IsIdenticalTo(imageA));
-            Assert.IsFalse(imageD.IsIdenticalTo(imageG));
+            Assert.IsTrue(imageD.IsIdenticalTo(imageE, 1));
+            Assert.IsFalse(imageD.IsIdenticalTo(imageA, 1));
+            Assert.IsFalse(imageD.IsIdenticalTo(imageG, 1));
 
-            Assert.IsTrue(imageF.IsIdenticalTo(imageG));
-            Assert.IsFalse(imageF.IsIdenticalTo(imageB));
+            Assert.IsTrue(imageF.IsIdenticalTo(imageG, 1));
+            Assert.IsFalse(imageF.IsIdenticalTo(imageB, 1));
         }
     }
 }

@@ -29,8 +29,8 @@ namespace Xamarin.VisUITest
             set { _Instance._platform = value; }
         }
 
-        private ushort _maximumDeviation = 0;
-        public static ushort MaximumDeviation
+        private float _maximumDeviation = 0;
+        public static float MaximumDeviation
         {
             get { return _Instance._maximumDeviation; }
             set
