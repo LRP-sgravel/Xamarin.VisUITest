@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Xamarin.UITest;
-using Xamarin.UITest.Queries;
+﻿using Xamarin.UITest;
 
 namespace Xamarin.VisUITest.Tests
 {
@@ -11,9 +6,6 @@ namespace Xamarin.VisUITest.Tests
     {
         public static IApp StartApp(Platform platform)
         {
-            VisUITest.Platform = platform;
-            VisUITest.ReferenceImagePath = "../../../_output/VisUITest/ref/";
-            VisUITest.CurrentImagePath = "../../../_output/VisUITest/";
             IApp result = null;
 
             if (platform == Platform.Android)

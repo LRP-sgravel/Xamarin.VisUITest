@@ -3,30 +3,24 @@ using System.Drawing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xamarin.UITest;
+using Xamarin.UITest.iOS;
 
 namespace Xamarin.VisUITest
 {
     public class VisUITest
     {
-        private string _referenceImagePath = "_output/VisUITest/ref/";
+        private string _referenceImagePath = "../../../_output/VisUITest/ref/";
         public static string ReferenceImagePath
         {
             get { return _Instance._referenceImagePath; }
             set { _Instance._referenceImagePath = value; }
         }
 
-        private string _currentImagePath = "_output/VisUITest/";
+        private string _currentImagePath = "../../../_output/VisUITest/";
         public static string CurrentImagePath
         {
             get { return _Instance._currentImagePath; }
             set { _Instance._currentImagePath = value; }
-        }
-        
-        private Platform _platform = Platform.iOS;
-        public static Platform Platform
-        {
-            get { return _Instance._platform; }
-            set { _Instance._platform = value; }
         }
 
         private float _maximumDeviation = 0;
@@ -62,11 +56,14 @@ namespace Xamarin.VisUITest
         {
         }
 
-        private static string GetPlatformScreenCoordsBackdoorName()
+        private static string GetPlatformScreenCoordsBackdoorName(IApp app)
         {
+            Platform platform = app is iOSApp
+                                    ? Platform.iOS
+                                    : Platform.Android;
             string backdoorName = string.Empty;
 
-            if (Platform == Platform.iOS)
+            if (platform == Platform.iOS)
             {
                 backdoorName = "getScreenSize:";
             }
@@ -78,13 +75,11 @@ namespace Xamarin.VisUITest
             return backdoorName;
         }
 
-
         public static Rectangle GetUsableScreenCoordinates(IApp app)
         {
-
             try
             {
-                string coordsJson = app.Invoke(GetPlatformScreenCoordsBackdoorName()) as string;
+                string coordsJson = app.Invoke(GetPlatformScreenCoordsBackdoorName(app)) as string;
                 JObject coordsJObject = JsonConvert.DeserializeObject<JObject>(coordsJson);
 
                 return new Rectangle(coordsJObject.Value<int>("X"),
@@ -94,13 +89,16 @@ namespace Xamarin.VisUITest
             }
             catch (Exception e)
             {
+                Platform platform = app is iOSApp
+                                        ? Platform.iOS
+                                        : Platform.Android;
                 string error = "Cannot find 'GetScreenCoords' VisUITest backdoor.  ";
 
-                if (Platform == Platform.Android)
+                if (platform == Platform.Android)
                 {
-                    error += "Was teh Android NuGet package added to your project and does your current Activity subclass VisUITestActivity?";
+                    error += "Was the Android NuGet package added to your project and does your current Activity subclass VisUITestActivity?";
                 }
-                else if (Platform == Platform.iOS)
+                else if (platform == Platform.iOS)
                 {
                     error += "Did you include the iOS VisUITest NuGet package in your project?";
                 }
