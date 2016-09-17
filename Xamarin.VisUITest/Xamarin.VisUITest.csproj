@@ -71,6 +71,7 @@
     <Compile Include="VisUITest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Xamarin.VisUITest.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

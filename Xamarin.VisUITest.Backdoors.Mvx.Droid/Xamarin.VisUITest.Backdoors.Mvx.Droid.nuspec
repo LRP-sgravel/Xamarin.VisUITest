@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Xamarin.VisUITest.Backdoors.Mvx.Droid</id>
+    <title>Xamarin.VisUITest MvvmCross MvxSplashScreenActivity backdoor</title>
+    <version>1.0.0</version>
+    <authors>Le rond-point</authors>
+    <owners>Le rond-point</owners>
+    <licenseUrl>https://www.gnu.org/copyleft/lesser.html</licenseUrl>
+    <projectUrl>https://github.com/LeRondPoint/Xamarin.VisUITest</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Xamarin.VisUITest is a visual regression tool built on top of Xamarin.UITest.  It allows for screenshot comparisons in order to find breaking UI discrepancies.  It is inspired by the Visualception project which can be found here : https://github.com/DigitalProducts/codeception-module-visualception</description>
+    <releaseNotes>First release.  Full screen comparisons.  Single element comparisons.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Xamarin UITest Regression Visual_Regression Visualception Test Acceptance Acceptance_Tests UI Automated Automation</tags>
+    <dependencies>
+      <group targetFramework="MonoAndroid">
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+      <file src="bin\Release\*.dll" target="lib\MonoAndroid10" />
+  </files>
+</package>

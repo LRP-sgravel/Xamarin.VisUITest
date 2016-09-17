@@ -206,7 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.VisUITest.App\Xamarin.VisUITest.App.csproj">
-      <Project>{BAA1AFD6-59ED-46F7-9E05-7C9EA1E25FC3}</Project>
+      <Project>{c0391e8c-5adb-4dd8-9af0-9f2ae6bd70c7}</Project>
       <Name>Xamarin.VisUITest.App</Name>
     </ProjectReference>
     <ProjectReference Include="..\Xamarin.VisUITest.Backdoors.Forms.Droid\Xamarin.VisUITest.Backdoors.Forms.Droid.csproj">
