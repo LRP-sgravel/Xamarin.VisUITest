@@ -6,12 +6,14 @@ using MvvmCross.Platform;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Presenter.Droid;
 using MvvmCross.Core.ViewModels;
+using Xamarin.VisUITest.App.Models;
 using Xamarin.VisUITest.Backdoors.Droid;
 
 namespace Xamarin.VisUITest.App.Droid
 {
     [Activity(Label = "Xamarin.VisUITest.App.Droid",
-              ScreenOrientation = ScreenOrientation.Portrait)]
+              ScreenOrientation = ScreenOrientation.Portrait,
+              Theme = "@style/MainTheme.Base")]
     public class MainActivity : VisUITestActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -23,6 +25,8 @@ namespace Xamarin.VisUITest.App.Droid
             MvxFormsApp mvxFormsApp = new MvxFormsApp();
             LoadApplication(mvxFormsApp);
             App.InitializeResources();
+
+            Mvx.RegisterSingleton(new ScreenSizes(GetUsableScreenCoordinates(true), GetUsableScreenCoordinates(false)));
 
             MvxFormsDroidPagePresenter presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsDroidPagePresenter;
             presenter.MvxFormsApp = mvxFormsApp;

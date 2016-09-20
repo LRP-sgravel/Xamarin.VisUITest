@@ -23,6 +23,13 @@ namespace Xamarin.VisUITest
             set { _Instance._currentImagePath = value; }
         }
 
+        private bool _alwaysRemoveStatusBar = true;
+        public static bool AlwaysRemoveStatusBar
+        {
+            get { return _Instance._alwaysRemoveStatusBar; }
+            set { _Instance._alwaysRemoveStatusBar = value; }
+        }
+
         private float _maximumDeviation = 0;
         public static float MaximumDeviation
         {
@@ -79,7 +86,7 @@ namespace Xamarin.VisUITest
         {
             try
             {
-                string coordsJson = app.Invoke(GetPlatformScreenCoordsBackdoorName(app)) as string;
+                string coordsJson = app.Invoke(GetPlatformScreenCoordsBackdoorName(app), AlwaysRemoveStatusBar) as string;
                 JObject coordsJObject = JsonConvert.DeserializeObject<JObject>(coordsJson);
 
                 return new Rectangle(coordsJObject.Value<int>("X"),

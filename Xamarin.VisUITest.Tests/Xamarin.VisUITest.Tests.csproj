@@ -69,6 +69,7 @@
     <Compile Include="Acceptance\AppResultScreenshotTests.cs" />
     <Compile Include="Acceptance\FullPageVisualTest.cs" />
     <Compile Include="Acceptance\NewImageReturnsInconclusive.cs" />
+    <Compile Include="Acceptance\StatusBarHideTests.cs" />
     <Compile Include="AppInitializer.cs" />
     <Compile Include="Helpers\VisUITestHelpers.cs" />
     <Compile Include="Unit\ImageComparison.cs" />

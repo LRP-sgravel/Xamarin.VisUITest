@@ -31,6 +31,8 @@ namespace Xamarin.VisUITest.Tests
             Bitmap referenceImage;
             AppResult page;
 
+            VisUITest.AlwaysRemoveStatusBar = false;
+
             page = app.Query("content").FirstOrDefault();
 
             app.DontSeeVisualChanges("FullScreenTest");

@@ -10,6 +10,7 @@ using MvvmCross.Forms.Presenter.Droid;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Localization;
+using Xamarin.VisUITest.App.Models;
 
 namespace Xamarin.VisUITest.App.Droid
 {
@@ -36,6 +37,11 @@ namespace Xamarin.VisUITest.App.Droid
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;
+        }
+
+        protected override void InitializePlatformServices()
+        {
+            base.InitializePlatformServices();
         }
 
         protected override IEnumerable<Assembly> ValueConverterAssemblies

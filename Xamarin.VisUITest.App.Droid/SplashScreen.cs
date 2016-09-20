@@ -9,7 +9,7 @@ namespace Xamarin.VisUITest.App.Droid
     [Activity(Label = "Xamarin.VisUITest.App.Droid",
         MainLauncher = true,
         Icon = "@drawable/icon",
-        Theme = "@style/ThemeOverlay.AppCompat.Light",
+        Theme = "@style/MainTheme.Base",
         NoHistory = true,
         ScreenOrientation = ScreenOrientation.Portrait)]
     public class SplashScreen : MvxSplashScreenActivity
