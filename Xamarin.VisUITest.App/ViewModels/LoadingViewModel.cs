@@ -1,53 +1,36 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Localization;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using Xamarin.VisUITest.App.Services;
+using Xamarin.VisUITest.App.Models;
 
 namespace Xamarin.VisUITest.App.ViewModels
 {
     class LoadingViewModel : MvxViewModel
     {
-        private Bootstrapper Bootstrapper { get; set; }
-
-        public string CopyrightText { get; set; }
-
-        private string mStatusText = string.Empty;
-        public string StatusText
+        public string ScreenSizeWithoutStatusbar
         {
-            get { return mStatusText; }
-            private set
+            get
             {
-                if (StatusText != value)
-                {
-                    mStatusText = value;
-                    RaisePropertyChanged(() => StatusText);
-                }
+                return "AlwaysRemove(true) : " + Mvx.Resolve<ScreenSizes>()
+                                                    .WithoutStatus;
+            }
+        }
+
+        public string ScreenSizeWithStatusbar
+        {
+            get
+            {
+                return "AlwaysRemove(false) : " + Mvx.Resolve<ScreenSizes>()
+                                                     .WithStatus;
             }
         }
 
         public LoadingViewModel()
         {
-            IMvxTextProvider textProvider = Mvx.Resolve<IMvxTextProvider>();
-
-            Bootstrapper = new Bootstrapper();
-
-            CopyrightText = textProvider.GetText(Constants.GeneralNamespace, Constants.TextTypeKey, "Copyright");
         }
 
         public override void Start()
         {
             base.Start();
-
-            Bootstrapper.BootTextChanged += status => { StatusText = status; };
-            Bootstrapper.BootCompleted += OnBootCompleted;
-
-            Bootstrapper.Boot();
-        }
-
-        public void OnBootCompleted()
-        {
-
         }
     }
 }

@@ -9,12 +9,12 @@ namespace Xamarin.VisUITest.Tests
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
-    public class FullPageVisualTest
+    public class AppResultScreenshotTests
     {
         IApp app;
         Platform platform;
 
-        public FullPageVisualTest(Platform platform)
+        public AppResultScreenshotTests(Platform platform)
         {
             this.platform = platform;
         }
@@ -26,21 +26,18 @@ namespace Xamarin.VisUITest.Tests
         }
 
         [Test]
-        public void ICanCompareFullScreens()
+        public void ICanCompareASingleElement()
         {
             Bitmap referenceImage;
-            AppResult page;
+            AppResult label;
 
-            VisUITest.AlwaysRemoveStatusBar = false;
+            label = app.Query("Just Another Label").FirstOrDefault();
 
-            page = app.Query("content").FirstOrDefault();
+            app.DontSeeVisualChanges("ElementScreenshotTest", label);
+            referenceImage = VisUITestHelpers.LoadReferenceImage("ElementScreenshotTest");
 
-            app.DontSeeVisualChanges("FullScreenTest");
-            referenceImage = VisUITestHelpers.LoadReferenceImage("FullScreenTest");
-
-            Assert.AreEqual(page.Rect.Height, referenceImage.Height);
-            Assert.AreEqual(page.Rect.Width, referenceImage.Width);
+            Assert.AreEqual(label.Rect.Height, referenceImage.Height);
+            Assert.AreEqual(label.Rect.Width, referenceImage.Width);
         }
     }
 }
-

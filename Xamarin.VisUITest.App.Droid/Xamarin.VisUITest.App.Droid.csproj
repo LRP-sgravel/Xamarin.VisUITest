@@ -115,10 +115,6 @@
       <HintPath>..\packages\MvvmCross.Plugin.Json.4.2.3\lib\MonoAndroid\MvvmCross.Plugins.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MvvmCross.Plugins.JsonLocalization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Plugin.JsonLocalization.4.2.3\lib\MonoAndroid\MvvmCross.Plugins.JsonLocalization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MvvmCross.Plugins.ResourceLoader, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Plugin.ResourceLoader.4.2.3\lib\MonoAndroid\MvvmCross.Plugins.ResourceLoader.dll</HintPath>
       <Private>True</Private>
@@ -177,7 +173,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrap\JsonLocalizationPluginBootstrap.cs" />
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Bootstrap\ResourceLoaderPluginBootstrap.cs" />
     <Compile Include="MainActivity.cs" />
@@ -211,7 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.VisUITest.App\Xamarin.VisUITest.App.csproj">
-      <Project>{BAA1AFD6-59ED-46F7-9E05-7C9EA1E25FC3}</Project>
+      <Project>{c0391e8c-5adb-4dd8-9af0-9f2ae6bd70c7}</Project>
       <Name>Xamarin.VisUITest.App</Name>
     </ProjectReference>
     <ProjectReference Include="..\Xamarin.VisUITest.Backdoors.Forms.Droid\Xamarin.VisUITest.Backdoors.Forms.Droid.csproj">

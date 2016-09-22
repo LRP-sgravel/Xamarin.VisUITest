@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Xamarin.VisUITest.Backdoors.Mvx.Droid.nuspec" />
   </ItemGroup>
   <Import Project="..\Xamarin.VisUITest.Backdoors.Droid.Shared\Xamarin.VisUITest.Backdoors.Droid.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
