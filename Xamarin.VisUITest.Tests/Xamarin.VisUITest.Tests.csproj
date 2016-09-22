@@ -61,8 +61,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="Xamarin.UITest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Xamarin.UITest.1.0.0\lib\Xamarin.UITest.dll</HintPath>
+    <Reference Include="Xamarin.UITest">
+      <HintPath>..\packages\Xamarin.UITest.2.0.0-beta03\lib\Xamarin.UITest.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +85,18 @@
     <ProjectReference Include="..\Xamarin.VisUITest\Xamarin.VisUITest.csproj">
       <Project>{c679bb9b-4956-4676-bc14-c5c7e0492e37}</Project>
       <Name>Xamarin.VisUITest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.VisUITest.App.Droid\Xamarin.VisUITest.App.Droid.csproj">
+      <Project>{718D7BB6-4308-4692-A76B-6EF502ECD477}</Project>
+      <Name>Xamarin.VisUITest.App.Droid</Name>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.VisUITest.App.iOS\Xamarin.VisUITest.App.iOS.csproj">
+      <Project>{C23B5D19-ECC5-4705-9CCF-CEC37692BAEC}</Project>
+      <Name>Xamarin.VisUITest.App.iOS</Name>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

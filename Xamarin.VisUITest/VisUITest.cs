@@ -68,7 +68,7 @@ namespace Xamarin.VisUITest
 
             if (Platform == Platform.iOS)
             {
-                backdoorName = "getScreenSize:";
+                backdoorName = "getScreenCoordinates:";
             }
             else
             {
@@ -77,7 +77,6 @@ namespace Xamarin.VisUITest
 
             return backdoorName;
         }
-
 
         public static Rectangle GetUsableScreenCoordinates(IApp app)
         {

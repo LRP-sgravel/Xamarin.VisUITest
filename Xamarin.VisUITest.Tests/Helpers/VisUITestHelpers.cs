@@ -35,5 +35,11 @@ namespace Xamarin.VisUITest.Tests.Helpers
 
             return result;
         }
+
+        public static AppResult GetTopMostView(IApp app)
+        {
+            
+        }
+
     }
 }

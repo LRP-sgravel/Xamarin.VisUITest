@@ -224,8 +224,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.VisUITest.App\Xamarin.VisUITest.App.csproj">
-      <Project>{BAA1AFD6-59ED-46F7-9E05-7C9EA1E25FC3}</Project>
+      <Project>{C0391E8C-5ADB-4DD8-9AF0-9F2AE6BD70C7}</Project>
       <Name>Xamarin.VisUITest.App</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.VisUITest.Backdoors.iOS\Xamarin.VisUITest.Backdoors.iOS.csproj">
+      <Project>{61418E55-2F45-434F-8D22-6CDB71043782}</Project>
+      <Name>Xamarin.VisUITest.Backdoors.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
