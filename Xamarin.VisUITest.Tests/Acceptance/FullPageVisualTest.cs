@@ -33,7 +33,7 @@ namespace Xamarin.VisUITest.Tests
 
             VisUITest.AlwaysRemoveStatusBar = false;
 
-            page = app.Query("content").FirstOrDefault();
+            page = VisUITestHelpers.GetTopMostView(app);
 
             app.DontSeeVisualChanges("FullScreenTest");
             referenceImage = VisUITestHelpers.LoadReferenceImage("FullScreenTest");

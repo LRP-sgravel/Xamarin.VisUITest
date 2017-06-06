@@ -1,5 +1,9 @@
 ﻿using System.Drawing;
 using System.IO;
+using System.Linq;
+using Xamarin.UITest;
+using Xamarin.UITest.iOS;
+using Xamarin.UITest.Queries;
 
 namespace Xamarin.VisUITest.Tests.Helpers
 {
@@ -38,8 +42,24 @@ namespace Xamarin.VisUITest.Tests.Helpers
 
         public static AppResult GetTopMostView(IApp app)
         {
+            Platform platform = app is iOSApp ? Platform.iOS : Platform.Android;
+            AppResult result = null;
             
-        }
+            if (platform == Platform.Android)
+            {
+                result = app.Query(e => e.Id("content")).FirstOrDefault();
+            }
+            else
+            {
+                result = app.Query(e => e.Class("Xamarin_Forms_Platform_iOS_Platform_DefaultRenderer")).FirstOrDefault();
 
+                if (VisUITest.AlwaysRemoveStatusBar)
+                {
+                    result.Rect.Y = 24;
+                }
+            }
+
+            return result;
+        }
     }
 }

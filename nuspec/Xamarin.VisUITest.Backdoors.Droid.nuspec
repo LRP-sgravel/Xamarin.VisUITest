@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Xamarin.VisUITest.Backdoors.Forms.Droid</id>
-    <title>Xamarin.VisUITest FormsApplicationActivity backdoor</title>
+    <id>Xamarin.VisUITest.Backdoors.Droid</id>
+    <title>Xamarin.VisUITest Android Activity backdoor</title>
     <version>1.0.0</version>
     <authors>Le rond-point</authors>
     <owners>Le rond-point</owners>
@@ -19,6 +19,6 @@
     </dependencies>
   </metadata>
   <files>
-      <file src="bin\Release\*.dll" target="lib\MonoAndroid10" />
+      <file src="..\Xamarin.VisUITest.Backdoors.Droid\bin\Release\*.dll" target="lib\MonoAndroid10" />
   </files>
 </package>

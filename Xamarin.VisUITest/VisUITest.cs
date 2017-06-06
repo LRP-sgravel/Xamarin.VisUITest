@@ -86,7 +86,15 @@ namespace Xamarin.VisUITest
         {
             try
             {
-                string coordsJson = app.Invoke(GetPlatformScreenCoordsBackdoorName(app), AlwaysRemoveStatusBar) as string;
+                object removeStatusBarParam = AlwaysRemoveStatusBar;
+
+                if(app is iOSApp)
+                {
+                    // Must be a string on iOS
+                    removeStatusBarParam = removeStatusBarParam.ToString();
+                }
+
+                string coordsJson = app.Invoke(GetPlatformScreenCoordsBackdoorName(app), removeStatusBarParam) as string;
                 JObject coordsJObject = JsonConvert.DeserializeObject<JObject>(coordsJson);
 
                 return new Rectangle(coordsJObject.Value<int>("X"),
@@ -99,7 +107,7 @@ namespace Xamarin.VisUITest
                 Platform platform = app is iOSApp
                                         ? Platform.iOS
                                         : Platform.Android;
-                string error = "Cannot find 'GetScreenCoords' VisUITest backdoor.  ";
+                string error = "Cannot find 'GetScreenCoordinates' VisUITest backdoor.  ";
 
                 if (platform == Platform.Android)
                 {
@@ -110,7 +118,7 @@ namespace Xamarin.VisUITest
                     error += "Did you include the iOS VisUITest NuGet package in your project?";
                 }
 
-                throw new MissingMethodException(error);
+                throw new MissingMethodException(error, e);
             }
         }
     }
