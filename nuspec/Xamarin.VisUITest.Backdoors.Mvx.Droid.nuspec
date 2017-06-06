@@ -19,6 +19,6 @@
     </dependencies>
   </metadata>
   <files>
-      <file src="bin\Release\*.dll" target="lib\MonoAndroid10" />
+      <file src="..\Xamarin.VisUITest.Backdoors.Mvx.Droid\bin\Release\*.dll" target="lib\MonoAndroid10" />
   </files>
 </package>

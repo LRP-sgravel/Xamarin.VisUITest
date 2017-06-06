@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Xamarin.VisUITest.Backdoors.Droid</id>
-    <title>Xamarin.VisUITest Android Activity backdoor</title>
+    <id>Xamarin.VisUITest</id>
+    <title>Xamarin.VisUITest</title>
     <version>1.0.0</version>
     <authors>Le rond-point</authors>
     <owners>Le rond-point</owners>
@@ -14,11 +14,13 @@
     <copyright>Copyright 2016</copyright>
     <tags>Xamarin UITest Regression Visual_Regression Visualception Test Acceptance Acceptance_Tests UI Automated Automation</tags>
     <dependencies>
-      <group targetFramework="MonoAndroid">
-      </group>
+        <dependency id="Xamarin.UITest" version="1.3" />
+        <dependency id="NUnit" version="2.6" />
+        <dependency id="AForge.Imaging" version="2.2.4" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
     </dependencies>
   </metadata>
   <files>
-      <file src="bin\Release\*.dll" target="lib\MonoAndroid10" />
+      <file src="..\Xamarin.VisUITest\bin\Release\Xamarin.VisUITest.dll" target="lib\Xamarin.VisUITest.dll" />
   </files>
 </package>

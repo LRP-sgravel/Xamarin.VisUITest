@@ -193,3 +193,4 @@ _output/VisUITest/**
 
 !_output/VisUITest/ref
 !_output/VisUITest/ref/*
+*.nupkg
